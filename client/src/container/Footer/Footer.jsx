@@ -9,6 +9,9 @@ const Footer = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const { name, email, message } = formData;
+  const [isNameEmpty,setIsNameEmpty] = useState(false);
+  const [isEmailEmpty,setIsEmailEmpty] = useState(false);
+  const [isMessageEmpty,setIsMessageEmpty] = useState(false);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -16,6 +19,28 @@ const Footer = () => {
   }
 
   const handleSubmit = () => {
+    const {name,email,message} = formData;
+    if((name==""||name.replace(/\s/g,'').length==0)){
+      setIsNameEmpty(true);
+      setTimeout(() => {
+        setIsNameEmpty(false)
+      }, 2000);
+      return;
+    }
+    if((email==""||email.replace(/\s/g,'').length==0)){
+      setIsEmailEmpty(true);
+      setTimeout(() => {
+        setIsEmailEmpty(false)
+      }, 2000);
+      return;
+    }
+    if(message==""||message.replace(/\s/g,'').length==0){
+      setIsMessageEmpty(true);
+      setTimeout(() => {
+        setIsMessageEmpty(false)
+      }, 2000);
+      return;
+    }
     setLoading(true);
     const contact = {
       _type: 'contact',
@@ -30,6 +55,7 @@ const Footer = () => {
       setTimeout(() => {
         setIsFormSubmitted(false)
       }, 5000);
+      setFormData({ name: '', email: '', message: '' });
     })
       .catch((err) => console.log(err));
   }
@@ -51,16 +77,19 @@ const Footer = () => {
       </div>
       {!isFormSubmitted ? (
         <div className="app__footer-form app__flex">
+        {isNameEmpty==true?(<p>Please don't leave the name input empty</p>):(null)}
           <div className="app__flex">
-            <input type="text" className='p-text' placeholder='Your Name' name='name' value={name} onChange={handleChangeInput} />
+            <input type="text" className='p-text' required placeholder='Your Name' name='name' value={name} onChange={handleChangeInput} />
           </div>
+          {isEmailEmpty==true?(<p>Please don't leave the email input empty</p>):(null)}
           <div className="app__flex">
-            <input type="email" className='p-text' placeholder='Your Email' name='email' value={email} onChange={handleChangeInput} />
+            <input type="email" className='p-text' required placeholder='Your Email' name='email' value={email} onChange={handleChangeInput} />
           </div>
+          {isMessageEmpty==true?(<p>Please don't leave the message input empty</p>):(null)}
           <div>
             <textarea name="message" value={message} placeholder='Your Message' className='p-text' onChange={handleChangeInput} />
           </div>
-          <button className="p-text" type='button' onClick={handleSubmit}>{!loading?'Send Message':'Sending...'}</button>
+          <button className="p-text" type='button' required onClick={handleSubmit}>{!loading?'Send Message':'Sending...'}</button>
         </div>
       ) : (
         <div>
