@@ -9,6 +9,11 @@ export default {
             type: 'string'
         },
         {
+            name:'link',
+            title:'Linkedin Url',
+            type:'string'
+        },
+        {
             name:'company',
             title:'Company',
             type:'string'

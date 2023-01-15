@@ -33,7 +33,9 @@ const Testimonial = () => {
       {testimonials.length && (
         <>
           <div className="app__testimonial-item app__flex">
-            <img src={urlFor(testimonials[currentIndex].imgurl)} alt={testimonials[currentIndex].name} />
+          {console.log(testimonials[currentIndex])}
+          <a href={testimonials[currentIndex].link} target="_blank"><img src={urlFor(testimonials[currentIndex].imgurl)} alt={testimonials[currentIndex].name} /></a>
+            
             <div className="app__testimonial-content">
               <p className="p-text">{testimonials[currentIndex].feedback}</p>
               <div>
@@ -78,18 +80,3 @@ export default AppWrap(
   'testimonials',
   'app__primarybg',
 );
-
-{/* <Slider {...settings}>
-
-            {testimonials.map((testimonial) => (
-              <div className="app__testimonial-item app__flex">
-              <div className="app__testimonial-content">
-              <p className="p-text">{testimonials[currentIndex].feedback}</p>
-              <div>
-                <h4 className="bold-text">{testimonials[currentIndex].name}</h4>
-                <h5 className="p-text">{testimonials[currentIndex].company}</h5>
-              </div>
-            </div>
-              </div>
-            ))}
-          </Slider> */}
