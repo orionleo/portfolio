@@ -20,6 +20,8 @@ const Work = () => {
       setFilterWork(data);
     })
   }, []);
+
+  
   const handleWorkFilter = (item) => {
     if(activeFilter==item) return;
     setActiveFilter(item);
